@@ -63,7 +63,8 @@ namespace rest_client
                 byte[] encodedBytes = utf8.GetBytes(jsonBody.ToString());
                 
                 // Let's take a look at the JSON we'll send to the service
-                Console.WriteLine(utf8.GetString(encodedBytes, 0, encodedBytes.Length));
+                Console.WriteLine("Request JSON being sent to Azure Language AI Service: "+utf8.GetString(encodedBytes, 0, encodedBytes.Length));
+                Console.WriteLine();
 
                 // Make an HTTP request to the REST interface
                 var client = new HttpClient();
@@ -89,12 +90,16 @@ namespace rest_client
                     // Display the JSON response in full (just so we can see it)
                     string responseContent = await response.Content.ReadAsStringAsync();
                     JObject results = JObject.Parse(responseContent);
-                    Console.WriteLine(results.ToString());
+                    Console.WriteLine($"Response from Azure Language AI Service:  {results.ToString()}");
+                    Console.WriteLine();
 
                     // Extract the detected language name for each document
                     foreach (JObject document in results["documents"])
                     {
                         Console.WriteLine("\nLanguage: " + (string)document["detectedLanguage"]["name"]);
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        
                     }
                 }
                 else

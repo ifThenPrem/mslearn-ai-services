@@ -27,10 +27,12 @@ namespace sdk_client
                 {
                     Console.WriteLine("\nEnter some text ('quit' to stop)");
                     userText = Console.ReadLine();
+                    Console.WriteLine();
                     if (userText.ToLower() != "quit")
                     {
                         // Call function to detect language
                         string language = GetLanguage(userText);
+                        Console.WriteLine("Response received from Azure AI Language Service:");
                         Console.WriteLine("Language: " + language);
                     }
 
